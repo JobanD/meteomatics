@@ -39,5 +39,5 @@ I will fix this in the future, the API call is getting blocked.
 
 ### Screenshots
 
-![Screengrab of Project Working on local server (Line Graph)](/src/assets/screenshots/Screen Shot 2023-02-24 at 4.55.02 AM.png)
-![Screengrab of Project Working on local server (Bar Graph)](/src/assets/screenshots/Screen Shot 2023-02-24 at 4.55.20 AM.png)
+![Screengrab of Project Working on local server (Line Graph)](/src/assets/screenshots/linegraph.png)
+![Screengrab of Project Working on local server (Bar Graph)](/src/assets/screenshots/bargraph.png)
