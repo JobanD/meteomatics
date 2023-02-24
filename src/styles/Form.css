@@ -1,0 +1,57 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  width: 60%;
+  margin: 10px auto;
+  background-color: bisque;
+  transition: all 0.5s ease-in-out;
+}
+
+.hidden {
+  transform: translate3d(0, -105vh, 0);
+  transition: all 0.5s ease-in-out;
+}
+
+.hamburger {
+  /* removes default border on button element */
+  border: 0;
+  height: 60px;
+  width: 60px;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background-color: beige;
+  color: #fff7eaf0;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  z-index: 9;
+  /* positions the icon to the right aligns it vertically */
+  position: absolute;
+  top: 10vh;
+  right: 25px;
+  display: block;
+}
+
+.expandedNav {
+  background-color: gray;
+  transform: rotate(90deg);
+}
+
+.errorMessage {
+  color: #f21e08;
+  max-width: 60%;
+  padding: 4px 0;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.formElement {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.formElement label {
+  width: 20%;
+  padding-right: 20px;
+}
