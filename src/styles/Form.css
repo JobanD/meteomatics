@@ -1,34 +1,61 @@
+.entireFormContainer {
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgb(0, 0, 0); /* Black fallback color */
+  background-color: rgba(0, 0, 0, 0); /* Black w/opacity */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: all 0.5s ease-in-out;
+}
+
 .formContainer {
-  display: flex;
-  flex-direction: column;
-  font-size: 20px;
-  width: 60%;
-  margin: 10px auto;
   background-color: bisque;
+  width: 100%; /* 100% width */
+  height: 100vh;
+  padding-bottom: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 25%; /* 25% from the top */
+  text-align: center; /* Centered text/links */
+  transition: all 0.5s ease-in-out;
+}
+
+.open {
+  display: flex;
+  height: 100%;
+  transform: translate3d(0, 0, 0);
   transition: all 0.5s ease-in-out;
 }
 
 .hidden {
-  transform: translate3d(0, -105vh, 0);
+  display: none;
+  transform: translate3d(0, -130%, 0);
   transition: all 0.5s ease-in-out;
+}
+
+.entireFormContainer > .hidden {
+  height: 0%;
 }
 
 .hamburger {
   /* removes default border on button element */
   border: 0;
+  opacity: 1;
   height: 60px;
   width: 60px;
   padding: 0.5rem;
   border-radius: 50%;
-  background-color: beige;
+  background-color: var(--main-dogwood-color);
   color: #fff7eaf0;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   z-index: 9;
   /* positions the icon to the right aligns it vertically */
   position: absolute;
-  top: 10vh;
-  right: 25px;
+  top: 15px;
+  right: 45px;
   display: block;
 }
 
@@ -48,10 +75,18 @@
 .formElement {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin: 5px;
+  width: 50vw;
 }
 
 .formElement label {
   width: 20%;
   padding-right: 20px;
+}
+
+.submitButton {
+  background-color: var(--main-brown-color);
+  margin: 20px;
 }

@@ -79,7 +79,7 @@ function useFetch(url) {
           );
         }
         let actualData = await response.json();
-        setData(actualData.data[0]);
+        setData(actualData);
         setError(null);
       } catch (err) {
         setError(err.message);

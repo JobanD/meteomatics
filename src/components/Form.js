@@ -65,7 +65,9 @@ export default function Form({ getFormData }) {
         </svg>
       </button>
 
-      <div className={isExpanded ? "formContainer" : "formContainer hidden"}>
+      <div
+        className={isExpanded ? "formContainer open" : "formContainer hidden"}
+      >
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="formElement">
             <label>Latitude</label>
@@ -73,6 +75,7 @@ export default function Form({ getFormData }) {
               type="text"
               name="latitude"
               id="latitude"
+              placeholder="42.317432"
               {...register("latitude", {
                 required: true,
               })}
@@ -87,6 +90,7 @@ export default function Form({ getFormData }) {
               type="text"
               name="longitude"
               id="longitude"
+              placeholder="-83.026772"
               {...register("longitude", {
                 required: true,
               })}
@@ -126,6 +130,7 @@ export default function Form({ getFormData }) {
               type="text"
               name="time"
               id="time"
+              placeholder="hh:mm"
               {...register("time", {
                 required: true,
               })}
@@ -149,7 +154,7 @@ export default function Form({ getFormData }) {
             )}
           </div>
 
-          <button type="submit" className="submitButton">
+          <button type="submit" className="submitButton button">
             Generate Data
           </button>
         </form>

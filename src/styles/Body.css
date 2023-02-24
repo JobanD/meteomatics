@@ -1,3 +1,59 @@
 .bodyContainer {
-  background-color: brown;
+  background: rgb(14, 0, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(14, 80, 255, 1) 0%,
+    rgba(5, 124, 236, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  );
+}
+
+.bodyText {
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.bodyText a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #f4e603;
+}
+
+.bodyText ul li {
+  list-style-type: none;
+  padding: 5px;
+}
+
+/* CSS */
+.button {
+  background-color: #fff000;
+  border-radius: 12px;
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-align: center;
+  transition: 200ms;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button:not(:disabled):hover,
+.button:not(:disabled):focus {
+  outline: 0;
+  background: #f4e603;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.15);
+}
+
+.button:disabled {
+  filter: saturate(0.2) opacity(0.5);
+  -webkit-filter: saturate(0.2) opacity(0.5);
+  cursor: not-allowed;
 }

@@ -10,10 +10,11 @@ export default function Body() {
   const [latitude, setLatitude] = useState(42.317432); // default values set to Windsor, Ontario, Canada
   const [longitude, setLongitude] = useState(-83.026772);
   const [date, setDate] = useState("2023-02-25");
-  const [endDate, setEndDate] = useState("");
-  const [time, setTime] = useState("T14:25:00.000-05:00");
+  const [endDate, setEndDate] = useState("2023-03-06");
+  const [time, setTime] = useState("14:25");
   const [parameter, setParameter] = useState([
     { key: 0, value: "t_2m:C", label: "Temperature (C)" },
+    { key: 1, value: "relative_humidity_2m:p", label: "Humidity (Pa)" },
   ]);
   //   const [formData, setFormData] = useState("");
 
@@ -42,8 +43,12 @@ export default function Body() {
     // "https://api.meteomatics.com/2023-02-22T14:25:00.000-05:00/t_4m:C/51.5073219,-0.1276474+48.8534951,2.3483915/json?"
     "https://api.meteomatics.com/" +
       date +
+      "T" +
       time +
-      `${endDate.length ? "--" + endDate + time : ""}` +
+      ":00.000-05:00" +
+      `${
+        endDate.length ? "--" + endDate + "T" + time + ":00.000-05:00:P1D" : ""
+      }` +
       "/" +
       parameter.map((param) => param.value).join(",") + // pass in comma seperated list of parameters
       "/" +
@@ -62,25 +67,51 @@ export default function Body() {
   console.log(JSON.stringify(data));
   console.log("ENDDATE");
   console.log(endDate);
-  console.log("PARAM");
-  console.log(parameter.map((param) => param.value).join(","));
+  console.log("TEST");
+  console.log(data?.data);
+
+  const valueData = data?.data;
 
   return (
     <div className="bodyContainer">
+      <Form getFormData={getFormData} />
+      <div className="bodyText">
+        <h2>Welcome to the Vinter Weather Visualization App</h2>
+        <h3>Things to Keep In Mind</h3>
+        <ul>
+          <li>
+            This data is brought to you by Meteomatics Weather API{" "}
+            <a
+              href="https://www.meteomatics.com/en/weather-api"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Learn More
+            </a>
+          </li>
+          <li>
+            Try clicking the parameters highlighted in the yellow buttons below
+            to view more data
+          </li>
+        </ul>
+      </div>
+
       <Display
+        // data={data?.data.map((d) =>
+        //   d.coordinates[0].dates.map((date) => date.value)
+        // )}
+        data={valueData}
         latitude={latitude}
         longitude={longitude}
         date={date}
+        endDate={endDate}
         time={time}
-        parameter={parameter.map((param) => param.value)}
+        type={parameter}
+        // parameter={parameter.map((param) => param.value)}
         // value={data?.data[0].coordinates[0].dates[0].value} // passes values of given parameters
-        value={data?.coordinates[0].dates.map((d) => d.value)} // passes values of given parameters
+        // value={data?.coordinates[0].dates.map((d) => d.value)} // passes values of given parameters
         // testing={data?.data[0]}
       />
-      <Form getFormData={getFormData} />
-      <p>TESTING: {data?.coordinates[0].dates[0].value}</p>
-      <h2>{latitude}</h2>
-      <h2>{longitude}</h2>
     </div>
   );
 }
