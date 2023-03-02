@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useWindowSize from "../hooks/useWindowSize";
 import "../styles/Display.css";
+import TextBody from "./TextBody";
 import {
   LineChart,
   Line,
@@ -16,14 +17,13 @@ import {
 
 export default function Display(props) {
   const [windowHeight, windowWidth] = useWindowSize(); // height and width of viewport
-  const [buttonValue, setButtonValue] = useState("default");
+  const [buttonValue, setButtonValue] = useState(["default", ""]);
   // color pallette for graph colors
   const colors = [
     "red",
     "green",
     "blue",
     "orange",
-    "yellow",
     "pink",
     "black",
     "gray",
@@ -32,6 +32,18 @@ export default function Display(props) {
   ];
 
   // create dataset for data visualization
+  // dataset returns array of objects where each object contains data about given parameter(s) at a point in time
+  /*  example return of a object in the array for default parameters: 
+{ 
+    Parameter: "t_2m:C", 
+    Latitude: 42.317432, 
+    Longitude: -83.026772, 
+    Date: "2023-03-25", 
+    Latitude: 42.317432, 
+    Longitude: -83.026772, 
+    Parameter: "t_2m:C",
+    "t_2m:C": 3.7 
+  } */
   const dataSet = [];
   const createDataset = () => {
     // iterate through different parameters
@@ -50,6 +62,12 @@ export default function Display(props) {
   };
   createDataset();
 
+  // function to set values for bar graph
+  // passed down to TextBody component
+  const handleClick = (button) => {
+    setButtonValue([button.value, button.label]);
+  };
+
   // function for Bar Graph taken from Recharts.org example
   // Creating unique triangular shapes
   const getPath = (x, y, width, height) => {
@@ -63,38 +81,27 @@ export default function Display(props) {
     Z`;
   };
 
+  // Used in combination with getPath function to create unique triangular shapes for bar graph
   const TriangleBar = (props) => {
     const { fill, x, y, width, height } = props;
 
     return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
   };
 
-  console.log(dataSet);
-  console.log(props.type);
-  console.log("BV");
-  console.log(buttonValue);
-  console.log(...dataSet.filter((f) => f.Parameter === buttonValue));
+  // console.log("BV");
+  // console.log(buttonValue);
+  // console.log(...dataSet.filter((f) => f.Parameter === buttonValue));
 
   return (
     <div className="displayContainer">
-      <h2>
-        Selected Date Range: {props.date.replaceAll("-", "/")}
-        {""}
-        {props.endDate.length ? " - " + props.endDate.replaceAll("-", "/") : ""}
-      </h2>
-      <h3>Selected Time: {props.time.slice(1, 6)}</h3>
-      <h3>Selected Parameters: {props.type.map((t) => t.label).join(", ")}</h3>
-      <div className="buttonContainer">
-        {props.type.map((t) => (
-          <button
-            className="toggleLabel button"
-            onClick={() => setButtonValue(t.value)}
-            value={t.value}
-          >
-            {t.label}
-          </button>
-        ))}
-      </div>
+      <TextBody
+        date={props.date}
+        endDate={props.endDate}
+        time={props.time}
+        buttonValue={buttonValue}
+        type={props.type}
+        handleClick={handleClick}
+      />
       <div className="lineChartContainer graph">
         <h3>Line Chart Display</h3>
         <LineChart
@@ -119,11 +126,11 @@ export default function Display(props) {
           ))}
         </LineChart>
       </div>
-      {buttonValue === "default" ? (
+      {buttonValue[0] === "default" ? (
         <p>Try Selecting One of the Parameter Buttons to display more Data</p>
       ) : (
         <div className="barGraphContainer graph">
-          <h3>Bar Chart Display</h3>
+          <h3>Bar Chart - {buttonValue[1]}</h3>
           <BarChart
             width={
               windowWidth < 450
@@ -131,19 +138,19 @@ export default function Display(props) {
                 : windowWidth - windowWidth / 4
             }
             height={windowHeight / 2}
-            data={[...dataSet.filter((f) => f.Parameter === buttonValue)]}
+            data={[...dataSet.filter((f) => f.Parameter === buttonValue[0])]}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="Date" />
             <YAxis />
             {/* <Bar dataKey={buttonValue} fill="#8884d8" /> */}
             <Bar
-              dataKey={buttonValue}
+              dataKey={buttonValue[0]}
               fill="#8884d8"
               shape={<TriangleBar />}
               label={{ position: "top" }}
             >
-              {[...dataSet.filter((f) => f.Parameter === buttonValue)].map(
+              {[...dataSet.filter((f) => f.Parameter === buttonValue[0])].map(
                 (entry, index) => (
                   <Cell key={`cell-${index}`} fill={colors[index % 20]} />
                 )

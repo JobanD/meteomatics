@@ -1,24 +1,23 @@
 .headerContainer {
-  padding-top: 5vh;
+  padding: 5vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(14, 0, 255);
-  background: linear-gradient(
-    90deg,
-    rgba(14, 80, 255, 1) 0%,
-    rgba(5, 124, 236, 1) 35%,
-    rgba(0, 212, 255, 1) 100%
-  );
   color: #333;
   font: 100% Arial, Sans Serif;
-  margin: 0;
-  padding: 0;
   overflow-x: hidden;
+}
+
+@media only screen and (max-width: 500px) {
+  .headerContainer {
+    align-items: baseline;
+    justify-content: baseline;
+  }
 }
 
 .headerContent {
   font-weight: bolder;
+  font-size: 1.4rem;
 }
 
 #background-wrap {
@@ -28,6 +27,7 @@
   position: fixed;
   right: 0;
   top: 0;
+  /* Z index -1 used so that background could be given -2 and both appear behind all content */
   z-index: -1;
 }
 
@@ -138,6 +138,7 @@
   -moz-box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
   box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
 
+  z-index: 9;
   height: 120px;
   position: relative;
   width: 350px;

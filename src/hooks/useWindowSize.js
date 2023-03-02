@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { debounce } from "lodash";
 
 export default function useWindowSize() {
   // Initialize state with undefined width/height so server and client renders match
@@ -12,11 +13,13 @@ export default function useWindowSize() {
       // Set window width/height to state
       setWindowSize([window.innerHeight, window.innerWidth]);
     };
-    window.addEventListener("resize", handleResize);
+    // 200ms delay on resizing to prevent constant resize on every pixel change
+    const debounceHandleResize = debounce(handleResize, 200);
+    window.addEventListener("resize", debounceHandleResize);
     // Call handler right away so state gets updated with initial window size
     handleResize();
     // Remove event listener on cleanup
-    return () => window.removeEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", debounceHandleResize);
   }, []); // Empty array ensures that effect is only run on mount
   return windowSize;
 }

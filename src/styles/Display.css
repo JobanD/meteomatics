@@ -1,6 +1,28 @@
 .displayContainer {
   margin-top: 30px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.selectedInfoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(225, 225, 225, 0.5);
+  width: 50%;
+  min-width: 400px;
+  border-radius: 15px;
+}
+
+.selectedInfo {
+  display: flex;
+  align-items: baseline;
+}
+
+.selectedInfo h3 {
+  padding-right: 5px;
 }
 
 .graph {

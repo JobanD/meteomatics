@@ -26,7 +26,7 @@ export default function Header() {
         </div>
       </div>
       <header className="headerContent">
-        <h1>Vinter Weather app</h1>
+        <h1>Vinter Weather</h1>
       </header>
     </div>
   );

@@ -17,6 +17,7 @@ html {
   /* this makes sure the padding and the border is included in the box sizing */
   box-sizing: border-box;
   overflow-x: hidden;
+  font-size: calc(15px + 0.390625vw);
 }
 
 html,
@@ -26,6 +27,18 @@ body {
   margin: 0;
   justify-content: center;
   text-rendering: optimizeLegibility;
+}
+
+body {
+  background: rgb(14, 0, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(14, 80, 255, 1) 0%,
+    rgba(5, 124, 236, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  /* Z index -2 used so that clouds could be given -1 and both appear behind all content */
+  z-index: -2;
 }
 
 .app-container,
@@ -42,4 +55,8 @@ body {
     "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h3 {
+  font-size: 1.1rem;
 }

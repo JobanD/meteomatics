@@ -9,14 +9,13 @@ export default function Body() {
   // set new values using form
   const [latitude, setLatitude] = useState(42.317432); // default values set to Windsor, Ontario, Canada
   const [longitude, setLongitude] = useState(-83.026772);
-  const [date, setDate] = useState("2023-02-25");
-  const [endDate, setEndDate] = useState("2023-03-06");
+  const [date, setDate] = useState("2023-03-25");
+  const [endDate, setEndDate] = useState("2023-04-06");
   const [time, setTime] = useState("14:25");
   const [parameter, setParameter] = useState([
     { key: 0, value: "t_2m:C", label: "Temperature (C)" },
     { key: 1, value: "relative_humidity_2m:p", label: "Humidity (Pa)" },
   ]);
-  //   const [formData, setFormData] = useState("");
 
   // form data function to get data from Form component
   // Used to make API call given user parameters
@@ -58,48 +57,19 @@ export default function Body() {
       "/json?"
   );
 
+  // loading screen, add more if time
   if (loading) return <h1>Loading...</h1>;
 
   if (error) console.log(error);
 
-  //   console.log("data is: " + JSON.stringify(data.data[0].coordinates[0]));
-  console.log("DATA");
-  console.log(JSON.stringify(data));
-  console.log("ENDDATE");
-  console.log(endDate);
-  console.log("TEST");
-  console.log(data?.data);
-
+  // main data returned from api, contains the actual measurements for requested parameters
   const valueData = data?.data;
 
   return (
     <div className="bodyContainer">
       <Form getFormData={getFormData} />
-      <div className="bodyText">
-        <h2>Welcome to the Vinter Weather Visualization App</h2>
-        <h3>Things to Keep In Mind</h3>
-        <ul>
-          <li>
-            This data is brought to you by Meteomatics Weather API{" "}
-            <a
-              href="https://www.meteomatics.com/en/weather-api"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn More
-            </a>
-          </li>
-          <li>
-            Try clicking the parameters highlighted in the yellow buttons below
-            to view more data
-          </li>
-        </ul>
-      </div>
-
+      {/* Display Component includes the data visualization objects, listed below parameters */}
       <Display
-        // data={data?.data.map((d) =>
-        //   d.coordinates[0].dates.map((date) => date.value)
-        // )}
         data={valueData}
         latitude={latitude}
         longitude={longitude}
@@ -107,10 +77,6 @@ export default function Body() {
         endDate={endDate}
         time={time}
         type={parameter}
-        // parameter={parameter.map((param) => param.value)}
-        // value={data?.data[0].coordinates[0].dates[0].value} // passes values of given parameters
-        // value={data?.coordinates[0].dates.map((d) => d.value)} // passes values of given parameters
-        // testing={data?.data[0]}
       />
     </div>
   );

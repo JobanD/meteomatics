@@ -64,7 +64,6 @@ export default function Form({ getFormData }) {
           />
         </svg>
       </button>
-
       <div
         className={isExpanded ? "formContainer open" : "formContainer hidden"}
       >
