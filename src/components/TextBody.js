@@ -24,7 +24,6 @@ export default function TextBody(props) {
         {props.type.map((t) => (
           <button
             className="toggleLabel button"
-            //   onClick={() => setButtonValue([t.value, t.label])}
             onClick={() => props.handleClick(t)}
             value={t.value}
           >
