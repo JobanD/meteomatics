@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 
 // Hook used to fetch apis
 function useFetch(url) {
-  const username = "test_dhindsa";
-  const password = "mhV7foVY80";
+  // INSERT ACTUAL USERNAME AND PASS
+  const username = "";
+  const password = "";
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

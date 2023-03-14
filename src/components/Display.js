@@ -2,18 +2,25 @@ import { useState } from "react";
 import useWindowSize from "../hooks/useWindowSize";
 import "../styles/Display.css";
 import TextBody from "./TextBody";
-import {
-  LineChart,
-  Line,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  BarChart,
-  Bar,
-  Cell,
-} from "recharts";
+import Notice from "./Notice";
+import BarGraphIMG from "../assets/screenshots/bargraph.png";
+import BarGraphBlurIMG from "../assets/blur/bargraphBlur.jpg";
+import HomeIMG from "../assets/screenshots/updatedHome.png";
+import HomeBlurIMG from "../assets/blur/updatedHomeBlur.jpg";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+// /Users/joban/Desktop/react/vinter/src/components/Display.js
+// import {
+//   LineChart,
+//   Line,
+//   CartesianGrid,
+//   XAxis,
+//   YAxis,
+//   Tooltip,
+//   Legend,
+//   BarChart,
+//   Bar,
+//   Cell,
+// } from "recharts";
 
 export default function Display(props) {
   const [windowHeight, windowWidth] = useWindowSize(); // height and width of viewport
@@ -94,6 +101,7 @@ export default function Display(props) {
 
   return (
     <div className="displayContainer">
+      <Notice />
       <TextBody
         date={props.date}
         endDate={props.endDate}
@@ -102,7 +110,34 @@ export default function Display(props) {
         type={props.type}
         handleClick={handleClick}
       />
-      <div className="lineChartContainer graph">
+      <div className="imageContainer img1">
+        <LazyLoadImage
+          src={BarGraphIMG}
+          PlaceholderSrc={BarGraphBlurIMG}
+          effect="blur"
+          width={
+            windowWidth < 450 ? windowWidth - 50 : windowWidth - windowWidth / 4
+          }
+          height={windowHeight / 2}
+          alt="Image of Bar Graph displaying temperature and humidty over a range of time"
+        />
+      </div>
+      <div className="imageContainer img2">
+        <LazyLoadImage
+          src={HomeIMG}
+          PlaceholderSrc={HomeBlurIMG}
+          effect="blur"
+          width={
+            windowWidth < 450 ? windowWidth - 50 : windowWidth - windowWidth / 4
+          }
+          height={windowHeight / 2}
+          alt="Image of home page while it was connected to API and functional"
+        />
+      </div>
+
+      {/* GRAPHS NOT FUNCTIONAL WITHOUT API CONNECTION */}
+
+      {/* <div className="lineChartContainer graph">
         <h3>Line Chart Display</h3>
         <LineChart
           width={
@@ -127,7 +162,10 @@ export default function Display(props) {
         </LineChart>
       </div>
       {buttonValue[0] === "default" ? (
-        <p>Try Selecting One of the Parameter Buttons to display more Data</p>
+        <p>
+          Try Selecting One of the Parameter Buttons to display more Data *no
+          longer functional
+        </p>
       ) : (
         <div className="barGraphContainer graph">
           <h3>Bar Chart - {buttonValue[1]}</h3>
@@ -143,7 +181,6 @@ export default function Display(props) {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="Date" />
             <YAxis />
-            {/* <Bar dataKey={buttonValue} fill="#8884d8" /> */}
             <Bar
               dataKey={buttonValue[0]}
               fill="#8884d8"
@@ -158,7 +195,7 @@ export default function Display(props) {
             </Bar>
           </BarChart>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

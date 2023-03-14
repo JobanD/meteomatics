@@ -6,6 +6,15 @@
   align-items: center;
 }
 
+.noticeContainer {
+  margin: 10px;
+  text-align: center;
+}
+
+.noticeText {
+  padding: 20px;
+}
+
 .selectedInfoContainer {
   display: flex;
   flex-direction: column;
@@ -36,4 +45,21 @@
 
 .toggleLabel {
   margin: 10px;
+}
+
+.imageContainer img {
+  margin: 10px;
+  border: solid rgb(50, 50, 50);
+  border-color: rgb(50, 50, 50);
+}
+
+.img1 img {
+  border-width: 6px 8px 6px 10px;
+  border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
+  transform: rotate(1deg);
+}
+
+.img2 img {
+  border-width: 6px 6px 8px 8px;
+  border-radius: 4% 95% 6% 95%/95% 4% 92% 5%;
 }
